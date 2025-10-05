@@ -1,0 +1,49 @@
+﻿<Window x:Class="HollywoodHostelsPaymentSystem.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Hollywood Hostels Payment System"
+        Height="450" Width="800"
+        Background="#f4f6f8"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <!-- Title -->
+        <TextBlock Text="Hollywood Hostels Payment System"
+                   FontSize="28" FontWeight="Bold"
+                   Foreground="#2c3e50"
+                   HorizontalAlignment="Center"
+                   Margin="0,40,0,0"/>
+
+        <!-- Modern Button Panel -->
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Margin="0,60,0,0"
+                    Orientation="Vertical"
+                    Width="250">
+
+            <!-- Manage Tenants -->
+            <Button x:Name="btnManageTenants"
+                    Content="🏠  Manage Tenants"
+                    Height="55" FontSize="16" FontWeight="SemiBold"
+                    Background="#3498db" Foreground="White"
+                    BorderThickness="0" Cursor="Hand" Margin="0,0,0,20"
+                    Click="OpenTenants_Click"/>
+
+            <!-- Record Payments -->
+            <Button x:Name="btnRecordPayments"
+                    Content="💰  Record Payments"
+                    Height="55" FontSize="16" FontWeight="SemiBold"
+                    Background="#27ae60" Foreground="White"
+                    BorderThickness="0" Cursor="Hand" Margin="0,0,0,20"
+                    Click="OpenPayments_Click"/>
+
+            <!-- View Dashboard -->
+            <Button x:Name="btnDashboard"
+                    Content="📊  View Dashboard"
+                    Height="55" FontSize="16" FontWeight="SemiBold"
+                    Background="#8e44ad" Foreground="White"
+                    BorderThickness="0" Cursor="Hand"
+                    Click="OpenDashboard_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

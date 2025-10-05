@@ -1,0 +1,155 @@
+﻿<Window x:Class="HollywoodHostelsPaymentSystem.PaymentWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Record Payment" Height="550" Width="900"
+        Background="#f4f6f8" WindowStartupLocation="CenterScreen">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- form -->
+            <RowDefinition Height="Auto"/>
+            <!-- search/export -->
+            <RowDefinition Height="*"/>
+            <!-- table -->
+        </Grid.RowDefinitions>
+
+        <!-- Payment Form -->
+        <Border Grid.Row="0" Background="White" CornerRadius="10" Padding="15" Margin="0,0,0,15"
+                BorderBrush="#ddd" BorderThickness="1">
+            <Border.Effect>
+                <DropShadowEffect Color="Black" Opacity="0.2" BlurRadius="10" ShadowDepth="2"/>
+            </Border.Effect>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+
+                <!-- Tenant -->
+                <StackPanel Margin="5">
+                    <Label Content="Tenant" FontWeight="Bold" FontSize="12"/>
+                    <ComboBox x:Name="cbTenant" Width="200"
+                              DisplayMemberPath="Name" SelectedValuePath="RoomNo"
+                              FontSize="14" Padding="5"/>
+                </StackPanel>
+
+                <!-- Month -->
+                <StackPanel Margin="5">
+                    <Label Content="Month" FontWeight="Bold" FontSize="12"/>
+                    <ComboBox x:Name="cbMonth" Width="150"
+                              SelectionChanged="CbMonth_SelectionChanged"
+                              FontSize="14" Padding="5">
+                        <ComboBoxItem Content="September"/>
+                        <ComboBoxItem Content="October"/>
+                        <ComboBoxItem Content="November"/>
+                        <ComboBoxItem Content="December"/>
+                        <ComboBoxItem Content="January"/>
+                        <ComboBoxItem Content="February"/>
+                        <ComboBoxItem Content="March"/>
+                        <ComboBoxItem Content="April"/>
+                        <ComboBoxItem Content="May"/>
+                        <ComboBoxItem Content="June"/>
+                        <ComboBoxItem Content="July"/>
+                        <ComboBoxItem Content="August"/>
+                    </ComboBox>
+                </StackPanel>
+
+                <!-- Year -->
+                <StackPanel Margin="5">
+                    <Label Content="Year" FontWeight="Bold" FontSize="12"/>
+                    <TextBox x:Name="txtYear" Width="80" FontSize="14" Padding="5"/>
+                </StackPanel>
+
+                <!-- Amount -->
+                <StackPanel Margin="5">
+                    <Label Content="Amount" FontWeight="Bold" FontSize="12"/>
+                    <TextBox x:Name="txtAmount" Width="100" FontSize="14" Padding="5"/>
+                </StackPanel>
+
+                <!-- Record Payment Button -->
+                <StackPanel Margin="5" VerticalAlignment="Bottom">
+                    <Button Width="122" Height="40"
+                            Background="#2196F3" Foreground="White"
+                            FontWeight="SemiBold" BorderThickness="0"
+                            Click="BtnRecord_Click" Cursor="Hand">
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border x:Name="border" Background="#2196F3" CornerRadius="8" Padding="10">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="💰" Margin="0,0,5,0"/>
+                                        <TextBlock Text="Record Payment"/>
+                                    </StackPanel>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="border" Property="Background" Value="#1976D2"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+
+                <!-- Back to Menu Button -->
+                <StackPanel Margin="10,0,0,0" VerticalAlignment="Bottom">
+                    <Button Width="105" Height="40"
+                            Background="#9C27B0" Foreground="White"
+                            FontWeight="SemiBold" BorderThickness="0"
+                            Click="BackToMainMenu_Click" Cursor="Hand">
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border x:Name="border" Background="#9C27B0" CornerRadius="8" Padding="10">
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="←" Margin="0,0,5,0"/>
+                                        <TextBlock Text="Back to Menu"/>
+                                    </StackPanel>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="border" Property="Background" Value="#7B1FA2"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+
+            </StackPanel>
+        </Border>
+
+        <!-- Search & Export -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10" VerticalAlignment="Top">
+            <StackPanel Margin="0,0,10,0">
+                <Label Content="Search (Month or Year)" FontWeight="Bold" FontSize="12"/>
+                <TextBox x:Name="txtPaymentSearch" Width="300" FontSize="14" Padding="5"
+                         TextChanged="TxtPaymentSearch_TextChanged"/>
+            </StackPanel>
+            <StackPanel VerticalAlignment="Bottom">
+                <Button Content="Export to CSV" Width="150" Height="35"
+                        Background="#4CAF50" Foreground="White"
+                        FontWeight="SemiBold" BorderThickness="0"
+                        Click="BtnExportCsv_Payments_Click" Cursor="Hand"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Payments Table -->
+        <DataGrid x:Name="dgPayments" Grid.Row="2" AutoGenerateColumns="False"
+                  AlternatingRowBackground="#f9f9f9"
+                  RowHeight="35" FontSize="14"
+                  BorderBrush="#ddd" BorderThickness="1"
+                  GridLinesVisibility="None" CanUserAddRows="False" IsReadOnly="True">
+            <DataGrid.Resources>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="Background" Value="#2196F3"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="Padding" Value="8"/>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Tenant" Binding="{Binding TenantName}" Width="200"/>
+                <DataGridTextColumn Header="Month" Binding="{Binding Month}" Width="150"/>
+                <DataGridTextColumn Header="Year" Binding="{Binding Year}" Width="80"/>
+                <DataGridTextColumn Header="Amount Paid" Binding="{Binding AmountPaid}" Width="150"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
