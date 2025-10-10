@@ -245,4 +245,5 @@ namespace HollywoodHostelsPaymentSystem
         public double MonthlyFee { get; set; }
         public double HolidayFee { get; set; }
     }
+
 }
